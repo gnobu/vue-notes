@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router'
 import { useNoteStore } from '../../stores/note-store'
 const noteStore = useNoteStore()
 </script>
@@ -6,10 +7,10 @@ const noteStore = useNoteStore()
 <template>
     <div class="toolbar">
         <div v-if="noteStore.fullName" class="action-icons">
-            <button v-if="noteStore.selectedNoteId" @click="noteStore.unselectNotes()"
+            <button data-testId="back-btn" v-if="noteStore.selectedNoteId" @click="noteStore.unselectNotes()"
                 class="action-icon material-symbols-outlined">arrow_back_ios_new</button>
-            <button v-if="noteStore.fullName && !noteStore.selectedNoteId" @click="noteStore.openNewNote()"
-                class="action-icon material-symbols-outlined">add_circle</button>
+            <button data-testId="add-btn" v-if="noteStore.fullName && !noteStore.selectedNoteId"
+                @click="noteStore.openNewNote()" class="action-icon material-symbols-outlined">add_circle</button>
         </div>
         <div class="toolbar-title">
             <RouterLink to="/">Notes</RouterLink>
