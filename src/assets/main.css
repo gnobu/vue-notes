@@ -90,7 +90,7 @@ body {
     position: relative;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 3px 0;
+    padding-block: .5rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     display: flex;
@@ -117,7 +117,6 @@ body {
 }
 
 .note-list li p {
-    /* line-height: 20px; */
     width: 80%;
 }
 
