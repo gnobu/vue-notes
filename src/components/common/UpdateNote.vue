@@ -34,6 +34,9 @@ watchEffect(() => {
             <span class="error-msg">{{ error }}</span>
             <contenteditable tag="div" class="content-editable" :contenteditable="true" :no-nl="false" :no-html="true"
                 v-model="content" />
+            <button type="button" @click="noteStore.removeNote(noteStore.selectedNote?.id)" class="form-delete-btn">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
             <button type="submit" class="form-save-btn">
                 <span class="material-symbols-outlined">save</span>
             </button>

@@ -193,6 +193,7 @@ li:hover .note-list-icon {
 }
 
 .form-btn,
+.form-delete-btn,
 .form-save-btn {
     padding: 10px;
     font-family: inherit;
@@ -219,6 +220,21 @@ li:hover .note-list-icon {
 .form-btn:hover,
 .form-save-btn:hover {
     background-color: #17594A;
+}
+
+.form-delete-btn {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #df0000;
+}
+
+.form-delete-btn:hover {
+    background-color: #591717;
 }
 
 
