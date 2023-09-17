@@ -5,10 +5,10 @@ const noteStore = useNoteStore()
 </script>
 
 <template>
-    <div class="toolbar">
+    <footer class="toolbar">
         <p>Hello, {{ noteStore.fullName }}</p>
         <button @click="$emit('logout')" class="action-icon material-symbols-outlined">logout</button>
-    </div>
+    </footer>
 </template>
 
 <style scoped>
