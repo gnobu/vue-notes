@@ -8,6 +8,7 @@ export const useNoteStore = defineStore('noteStore', {
         notes: [],
         selectedNoteId: null,
         notesView: 'list',
+        isLoading: false,
         notice: {
             'blankTitle': 'Title can not be blank',
             'noNotesFound': 'No notes added yet!'
@@ -25,6 +26,7 @@ export const useNoteStore = defineStore('noteStore', {
     actions: {
         async signup(payload) {
             try {
+                this.isLoading = true
                 const { data } = await axios.post(`${base_url}/users`, payload)
                 this.token = data.token
                 this.setUserData(data)
@@ -32,10 +34,13 @@ export const useNoteStore = defineStore('noteStore', {
             } catch (error) {
                 console.log(error)
                 return false
+            } finally{
+                this.isLoading = false
             }
         },
         async signin(payload) {
             try {
+                this.isLoading = true
                 const { data } = await axios.post(`${base_url}/users/signin`, payload)
                 this.token = data.token
                 this.setUserData(data)
@@ -43,20 +48,26 @@ export const useNoteStore = defineStore('noteStore', {
             } catch (error) {
                 console.log(error)
                 return false
+            } finally{
+                this.isLoading = false
             }
         },
         async fetchNotes() {
             try {
+                this.isLoading = true
                 const { data } = await axios.get(`${base_url}/api/note`, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
                 this.notes = data
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         async addNote(noteData) {
             try {
+                this.isLoading = true
                 const { data } = await axios.post(`${base_url}/api/note`, noteData, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
@@ -64,10 +75,13 @@ export const useNoteStore = defineStore('noteStore', {
                 this.unselectNotes()
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         async addToPinned(noteId) {
             try {
+                this.isLoading = true
                 const { data } = await axios.put(`${base_url}/api/note/${noteId}`, { pinned: true }, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
@@ -78,10 +92,13 @@ export const useNoteStore = defineStore('noteStore', {
                 this.notes = updatedNotes
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         async removeFromPinned(noteId) {
             try {
+                this.isLoading = true
                 const { data } = await axios.put(`${base_url}/api/note/${noteId}`, { pinned: false }, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
@@ -92,10 +109,13 @@ export const useNoteStore = defineStore('noteStore', {
                 this.notes = updatedNotes
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         async removeNote(noteId) {
             try {
+                this.isLoading = true
                 const res = await axios.delete(`${base_url}/api/note/${noteId}`, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
@@ -103,10 +123,13 @@ export const useNoteStore = defineStore('noteStore', {
                 this.unselectNotes()
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         async updateNote(noteData) {
             try {
+                this.isLoading = true
                 const { data } = await axios.put(`${base_url}/api/note/${noteData.id}`, noteData, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
@@ -117,6 +140,8 @@ export const useNoteStore = defineStore('noteStore', {
                 this.notes = updatedNotes
             } catch (error) {
                 console.log(error)
+            } finally{
+                this.isLoading = false
             }
         },
         selectNote(noteId) {

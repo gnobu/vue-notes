@@ -7,14 +7,19 @@ const noteStore = useNoteStore()
 
 const title = ref('')
 const content = ref('')
-const error = computed(() => {
-    if (!title.value.trim().length || !content.value.trim().length) {
-        return 'title and content are required'
+const error = ref('')
+const editing = computed(() => {
+    if (title.value !== noteStore.selectedNote?.title || content.value !== noteStore.selectedNote?.content) {
+        return true
     }
-    return ''
+    return false
 })
 function handleSubmit() {
-    if (error.value) return
+    if (!title.value.trim().length || !content.value.trim().length) {
+        error.value = 'title and content are required'
+        return
+    }
+    // if (error.value) return
 
     noteStore.updateNote({
         id: noteStore.selectedNote.id,
@@ -35,10 +40,11 @@ watchEffect(() => {
             <span class="error-msg">{{ error }}</span>
             <contenteditable tag="div" class="content-editable" :contenteditable="true" :no-nl="false" :no-html="true"
                 v-model="content" />
-            <button type="button" @click="noteStore.removeNote(noteStore.selectedNote?.id)" class="form-delete-btn">
+            <button v-if="!noteStore.isLoading" type="button" @click="noteStore.removeNote(noteStore.selectedNote?.id)"
+                class="form-delete-btn">
                 <span class="material-symbols-outlined">delete</span>
             </button>
-            <button type="submit" class="form-save-btn">
+            <button v-if="!noteStore.isLoading && editing" type="submit" class="form-save-btn">
                 <span class="material-symbols-outlined">save</span>
             </button>
         </form>
