@@ -35,15 +35,20 @@ async function submitForm() {
             <div class="container">
                 <h2 class="form-intro">Welcome to Notes</h2>
                 <div class="form-toggle">
-                    <button @click="hasAccount = true" :class="`toggle-btn ${!hasAccount ? 'clickable' : ''}`">Login</button>
-                    <button @click="hasAccount = false" :class="`toggle-btn ${hasAccount ? 'clickable' : ''}`">Signup</button>
+                    <button @click="hasAccount = true"
+                        :class="`toggle-btn ${!hasAccount ? 'clickable' : ''}`">Login</button>
+                    <button @click="hasAccount = false"
+                        :class="`toggle-btn ${hasAccount ? 'clickable' : ''}`">Signup</button>
                 </div>
                 <form data-testId="auth-form" @submit.prevent="submitForm">
+                    <span v-if="hasAccount" class="info">Login to continue</span>
+                    <span v-else class="info">Create an account to get started</span>
                     <input v-if="!hasAccount" type="text" data-testId="fullName" class="input-title"
                         v-model="noteStore.fullName" placeholder="Full Name">
-                    <input type="text" data-testId="email" class="input-title" v-model="noteStore.email" placeholder="Email">
-                    <input type="text" data-testId="password" class="input-title" v-model="password" placeholder="Password">
-                    <!-- <span class="error-msg">{{ error }}</span> -->
+                    <input type="text" data-testId="email" class="input-title" v-model="noteStore.email"
+                        placeholder="Email">
+                    <input type="password" data-testId="password" class="input-title" v-model="password" placeholder="Password">
+                    <span class="error-msg">{{ errorMsg }}</span>
                     <button data-testId="submit-btn" type="submit" class="form-btn">
                         <span>{{ hasAccount ? 'Login' : 'Sign up' }}</span>
                     </button>
@@ -55,10 +60,11 @@ async function submitForm() {
 </template>
 
 <style scoped>
-.container{
+.container {
     max-width: 500px;
     margin-inline: auto;
 }
+
 .form-toggle {
     display: flex;
     margin-inline: auto;
@@ -81,5 +87,10 @@ async function submitForm() {
 
 .toggle-btn.clickable:hover {
     background-color: #cacaca;
+}
+
+.info {
+    text-align: center;
+    margin-block: 1rem;
 }
 </style>
