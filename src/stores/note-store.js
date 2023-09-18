@@ -81,16 +81,13 @@ export const useNoteStore = defineStore('noteStore', {
         },
         async addToPinned(noteId) {
             try {
+                this.optimisticPin(noteId)
                 this.isLoading = true
                 const { data } = await axios.put(`${base_url}/api/note/${noteId}`, { pinned: true }, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
-                const updatedNotes = this.notes.map(note => {
-                    if (note.id === data.id) note.pinned = true
-                    return note
-                })
-                this.notes = updatedNotes
             } catch (error) {
+                this.optimisticUnpin(noteId)
                 console.log(error)
             } finally{
                 this.isLoading = false
@@ -98,20 +95,31 @@ export const useNoteStore = defineStore('noteStore', {
         },
         async removeFromPinned(noteId) {
             try {
+                this.optimisticUnpin(noteId)
                 this.isLoading = true
                 const { data } = await axios.put(`${base_url}/api/note/${noteId}`, { pinned: false }, {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
-                const updatedNotes = this.notes.map(note => {
-                    if (note.id === data.id) note.pinned = false
-                    return note
-                })
-                this.notes = updatedNotes
             } catch (error) {
+                this.optimisticPin(noteId)
                 console.log(error)
             } finally{
                 this.isLoading = false
             }
+        },
+        optimisticPin(noteId) {
+            const updatedNotes = this.notes.map(note => {
+                if (note.id === noteId) note.pinned = true
+                return note
+            })
+            this.notes = updatedNotes
+        },
+        optimisticUnpin(noteId) {
+            const updatedNotes = this.notes.map(note => {
+                if (note.id === noteId) note.pinned = false
+                return note
+            })
+            this.notes = updatedNotes
         },
         async removeNote(noteId) {
             try {
