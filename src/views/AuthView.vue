@@ -7,7 +7,8 @@ const router = useRouter()
 const noteStore = useNoteStore()
 
 const hasAccount = ref(true)
-const password = ref()
+const password = ref('')
+const errorMsg = ref('')
 
 async function submitForm() {
     const payload = {
@@ -15,12 +16,15 @@ async function submitForm() {
         fullName: noteStore.fullName,
         email: noteStore.email
     }
-    const success = hasAccount.value
+    const error = hasAccount.value
         ? await noteStore.signin(payload)
         : await noteStore.signup(payload)
-    if (success) {
+    if (!error) {
         password.value = ''
         router.push('/')
+    } else {
+        password.value = ''
+        errorMsg.value = error
     }
 }
 </script>

@@ -30,10 +30,10 @@ export const useNoteStore = defineStore('noteStore', {
                 const { data } = await axios.post(`${base_url}/users`, payload)
                 this.token = data.token
                 this.setUserData(data)
-                return true
+                return
             } catch (error) {
                 console.log(error)
-                return false
+                return 'invalid credentials'
             } finally{
                 this.isLoading = false
             }
@@ -44,10 +44,10 @@ export const useNoteStore = defineStore('noteStore', {
                 const { data } = await axios.post(`${base_url}/users/signin`, payload)
                 this.token = data.token
                 this.setUserData(data)
-                return true
+                return
             } catch (error) {
                 console.log(error)
-                return false
+                return 'invalid credentials'
             } finally{
                 this.isLoading = false
             }
