@@ -2,6 +2,26 @@
 
 :root {
     font-size: clamp(16px, 3vmin, 48px);
+
+}
+
+::-webkit-scrollbar {
+    width: .2rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 1rem;
+    margin-block: .2rem;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: rgb(135, 127, 142);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(135, 127, 142, .7);
 }
 
 * {
@@ -373,6 +393,6 @@ h4.note-card-title {
 /* @media (max-width:650px) { */
 @media (max-aspect-ratio:2/3) {
     .grid-card-wrapper {
-        grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 }
