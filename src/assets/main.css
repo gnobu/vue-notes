@@ -363,3 +363,16 @@ h4.note-card-title {
         display: block;
     }
 }
+
+@media (max-width:1023px) {
+    .grid-card-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* @media (max-width:650px) { */
+@media (max-aspect-ratio:2/3) {
+    .grid-card-wrapper {
+        grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    }
+}
