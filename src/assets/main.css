@@ -212,6 +212,9 @@ li:hover .note-list-icon {
 
 .error-msg {
     color: #f03d58;
+    font-size: .8rem;
+    font-style: italic;
+    margin-bottom: .5rem;
 }
 
 /* Content */
