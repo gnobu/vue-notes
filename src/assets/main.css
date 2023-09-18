@@ -32,6 +32,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    /* I'm sorry... */
+    height: 7.5dvh;
 }
 
 .toolbar-title {
@@ -67,7 +70,7 @@ body {
 .content-wrapper {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 85dvh;
 }
 
 /* Sidebar List Item */
@@ -288,6 +291,7 @@ li:hover .note-list-icon {
     display: grid;
     grid-template-columns: repeat(auto-fit, clamp(150px, 50%, 230px));
     gap: min(5%, 20px);
+    margin-bottom: 1rem;
 }
 
 .note-card {
