@@ -29,7 +29,7 @@ async function handleSubmit() {
             <span class="error-msg">{{ error }}</span>
             <contenteditable tag="div" data-testId="content-input" class="content-editable" :contenteditable="true"
                 :no-nl="false" :no-html="true" v-model="content" />
-            <button data-testId="submit-btn" type="submit" class="form-save-btn">
+            <button v-if="!noteStore.isLoading" data-testId="submit-btn" type="submit" class="form-save-btn">
                 <span class="material-symbols-outlined">save</span>
             </button>
         </form>
