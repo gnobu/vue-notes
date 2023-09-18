@@ -44,9 +44,8 @@ body {
 }
 
 /* Toolbar */
+.footer,
 .toolbar {
-    background-color: #6528F7;
-    color: #fff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -54,6 +53,16 @@ body {
 
     /* I'm sorry... */
     height: 7.5dvh;
+}
+
+.footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: #F4F2DE;
+}
+
+.toolbar {
+    background-color: #6528F7;
+    color: #fff;
 }
 
 .toolbar-title {
@@ -99,6 +108,7 @@ body {
     border-right: 1px solid #dedede;
     padding: 15px;
     background-color: #E9B384;
+    background-color: #e9b38483;
     overflow-y: auto;
 }
 

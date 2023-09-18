@@ -47,6 +47,7 @@ async function submitForm() {
             </div>
         </div>
     </main>
+    <footer class="footer"></footer>
 </template>
 
 <style scoped>
