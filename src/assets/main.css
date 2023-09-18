@@ -285,9 +285,7 @@ li:hover .note-list-icon {
 .grid-card-wrapper {
     width: 100%;
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(25%, 200px);
-    /* align-items: start; */
+    grid-template-columns: repeat(auto-fit, clamp(150px, 50%, 230px));
     gap: min(5%, 20px);
 }
 
