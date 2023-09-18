@@ -16,10 +16,11 @@ const error = computed(() => {
 function handleSubmit() {
     if (error.value) return
 
-    noteStore.updateNote({ id: noteStore.selectedNote.id, title: title.value, content: content.value })
-
-    title.value = ''
-    content.value = ''
+    noteStore.updateNote({
+        id: noteStore.selectedNote.id,
+        title: title.value,
+        content: content.value
+    })
 }
 watchEffect(() => {
     title.value = noteStore.selectedNote?.title || ''

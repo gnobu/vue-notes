@@ -61,6 +61,7 @@ export const useNoteStore = defineStore('noteStore', {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
                 this.notes = [...this.notes, data]
+                this.unselectNotes()
             } catch (error) {
                 console.log(error)
             }
@@ -99,7 +100,7 @@ export const useNoteStore = defineStore('noteStore', {
                     headers: { Authorization: `Bearer ${this.token}` }
                 })
                 this.notes = this.notes.filter(note => note.id !== noteId)
-                this.selectedNoteId = null
+                this.unselectNotes()
             } catch (error) {
                 console.log(error)
             }
